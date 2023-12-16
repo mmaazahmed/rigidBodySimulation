@@ -2,7 +2,7 @@
 import { createWorld,simulateWorld,populateWorld } from "./world.js";
 import { renderWorld } from "./renderer.js";
 import { applyVerletIntegration,applyEularIntegration } from "./integration.js";
-import { applySimpleCollision,setBoundry } from "./collision.js";
+import { applySimpleCollision,createBoundaryModule} from "./collision.js";
 import { initialiseInputListeners } from "./input.js";
 
 
@@ -12,20 +12,18 @@ canvas.height=window.innerHeight; canvas.width=window.innerWidth;
 const ctx=canvas.getContext("2d");
 
 
-const timeStep=0.1;
 const nBodies=10;
 const world =createWorld(ctx);
-populateWorld(world,nBodies); 
+populateWorld(world,nBodies);
 initialiseInputListeners(world);
 
-setBoundry(world,canvas.height/2);
+const BoundaryModule=createBoundaryModule();
+BoundaryModule.rectangular(world,canvas.height);
 
 function animate(){
-    console.log(world.isPause);
     requestAnimationFrame(animate);
     simulateWorld(world);
     renderWorld(world,canvas.width,canvas.height);
-
 }
 animate();
 
