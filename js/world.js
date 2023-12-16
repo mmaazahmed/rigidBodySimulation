@@ -1,13 +1,14 @@
 import { createShapeModule } from "./bodies.js";
+import { applyVerletIntegration,applyEularIntegration } from "./integration.js";
+import { applySimpleCollision } from "./collision.js";
 import { Vec2 } from "./util/vector.js";
-// import { createShapeFromName } from "./bodies.js";
 
 function getRandomRange(max,min){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function getRandomPos(world){
-    const x=getRandomRange(world.width-10,0);
-    const y=getRandomRange(world.height-10,0);
+    const x=getRandomRange(2000-10,0);
+    const y=getRandomRange(2000-10,0);
     return Vec2(x,y);
 }
 export function populateWorld(world,nBodies){
@@ -29,14 +30,30 @@ export function populateWorld(world,nBodies){
     }
 }
 
-export function createWorld(ctx,width,height,timeStep){
+export function createWorld(ctx,timeStep=0.1,updateInterval=60){
     return{
         ctx,
-        width,
-        height,
         timeStep,
-        bodies : []
+        bodies : [],
+        isPause:false,
+        boundaries:[],
+        updateInterval,
+        displayDy:0,
+        displayDx:0
     }
 }
 
+export function simulateWorld(world){
+    if(world.isPause){return;}
+    applyEularIntegration(world);
+    applySimpleCollision(world);
+}
 
+// function animate(){
+//     requestAnimationFrame(animate);
+//     update(world);
+//     renderWorld(world,canvas.width,canvas.height);
+
+// }
+// // circle.draw/(ctx);
+// animate();

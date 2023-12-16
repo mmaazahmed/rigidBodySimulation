@@ -1,9 +1,11 @@
 
-import { createWorld } from "./world.js";
-import {populateWorld } from "./world.js";
+import { createWorld,simulateWorld,populateWorld } from "./world.js";
 import { renderWorld } from "./renderer.js";
 import { applyVerletIntegration,applyEularIntegration } from "./integration.js";
-import { applySimpleCollision } from "./collision.js";
+import { applySimpleCollision,setBoundry } from "./collision.js";
+import { initialiseInputListeners } from "./input.js";
+
+
 const canvas=document.getElementById("mycanvas");
 canvas.style.background="pink";
 canvas.height=window.innerHeight; canvas.width=window.innerWidth;
@@ -12,22 +14,18 @@ const ctx=canvas.getContext("2d");
 
 const timeStep=0.1;
 const nBodies=10;
-
-const world =createWorld(ctx,canvas.width,canvas.height,timeStep);
+const world =createWorld(ctx);
 populateWorld(world,nBodies); 
+initialiseInputListeners(world);
 
-function update(world){
-    applyEularIntegration(world);
-    applySimpleCollision(world);
-}
+setBoundry(world,canvas.height/2);
 
 function animate(){
-requestAnimationFrame(animate);
-update(world);
-renderWorld(world);
-
+    console.log(world.isPause);
+    requestAnimationFrame(animate);
+    simulateWorld(world);
+    renderWorld(world,canvas.width,canvas.height);
 
 }
-// circle.draw/(ctx);
 animate();
 
