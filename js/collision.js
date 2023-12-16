@@ -1,15 +1,32 @@
-function createBoundary(scale=5,length=1,height=1){
-    return{
+function createBoundary(type,world,scale,position){
+
+    const [x,y]=position;
+    
+    const boundary={
+        type,
         scale,
-        length: length * scale,
-        height : height * scale
+        length: (scale)*y,
+        height: (scale)*x
+    };
+    // console.log(boundary.type,boundary.length,boundary.height);
+
+    world.boundaries.push(boundary);
+}
+
+export function createBoundaryModule(){
+    return {
+        circular:(world,scale=5,position=[1,1])=>{
+            return createBoundary('Circular',world,scale,position);
+        },
+        rectangular:(world,scale=5,position=[1,1])=>{
+            return createBoundary('RECTANGULAR',world,scale,position);
+        }
     };
 }
 
-function simpleCollision(world,boundary){
+function handleSimpleCollision(world,boundary){
     const height=boundary.height;
     const width=boundary.width;
-    console.log(height);
     for (const body of world.bodies){
         if(body.currentPosition.y+body.size + 5>= height){
             body.velocity.y*=-1;
@@ -17,15 +34,13 @@ function simpleCollision(world,boundary){
     }   
 }
 
+
 export function applySimpleCollision(world){
     for (const boundary of world.boundaries){
-        simpleCollision(world,boundary);
+        handleSimpleCollision(world,boundary);
     }
 }
 
-export function setBoundry(world,scale){
-    const boundary= createBoundary(scale);
-    console.log(boundary);
-    world.boundaries.push(boundary);
-    
-}
+// function addBoundry(world,scale){
+//     world.boundaries.push(boundary);
+// }
