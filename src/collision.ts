@@ -1,5 +1,5 @@
-import { PhysicalBody, Boundary,BoundaryType, Vector2D, World } from "./interfaces";
-import { Vec2 } from "./util/vector";
+import { PhysicalBody, Boundary,BoundaryType, Vector2D, World } from "./interfaces.js";
+import { Vec2 } from "./util/vector.js";
 
 function createCircularBoundary(world:World,radius:number,position:Vector2D){
     const {x,y}=position;
@@ -59,8 +59,8 @@ function handleSimpleCollision(world:World,boundary:Boundary){
         const bodyLeft=body.currentPosition.x-body.size;
         const bodyRight=body.currentPosition.x+body.size;
         if (!isInsideBoundary(body,boundary)){continue;}
-        
         if(bodyTop<=top){
+            console.log('here')
             body.velocity.y*=-1;
         }else if(bodyBottom >= bottom){
             body.velocity.y*=-1;

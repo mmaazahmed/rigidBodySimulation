@@ -1,5 +1,5 @@
-import { Vec2 } from "./util/vector";
-import { drawCircle, drawRectangle } from "./renderer";
+import { Vec2 } from "./util/vector.js";
+import { drawCircle, drawRectangle } from "./renderer.js";
 function createIdGenerator() {
     let value = 0;
     return () => value++;
@@ -21,37 +21,36 @@ function createCircle(radius, currentPosition, velocity, acceleration, mass) {
     const circle = {
         id: getNextId(),
         previousPosition: Vec2(),
-        currentPosition,
+        currentPosition: currentPosition.copy(),
         size: radius,
-        velocity,
-        acceleration,
+        velocity: velocity.copy(),
+        acceleration: acceleration.copy(),
         mass,
         draw(ctx) {
             drawCircle(ctx, this.currentPosition, this.size);
         },
         updatePosition(newPosition) {
-            this.previousPosition = this.currentPosition;
-            this.currentPosition = newPosition;
+            this.previousPosition = this.currentPosition.copy();
+            this.currentPosition = newPosition.copy();
         }
     };
-    // console.log(test)
     return circle;
 }
 function createSquare(length, currentPosition, velocity, acceleration, mass) {
     const square = {
         id: getNextId(),
         size: length,
-        currentPosition,
         previousPosition: Vec2(),
-        velocity,
-        acceleration,
+        currentPosition: currentPosition.copy(),
+        velocity: velocity.copy(),
+        acceleration: acceleration.copy(),
         mass,
         draw(ctx) {
             drawRectangle(ctx, this.currentPosition, this.size);
         },
         updatePosition(newPosition) {
-            this.previousPosition = this.currentPosition;
-            this.currentPosition = newPosition;
+            this.previousPosition = this.currentPosition.copy();
+            this.currentPosition = newPosition.copy();
         }
     };
     return square;

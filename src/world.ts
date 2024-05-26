@@ -1,8 +1,8 @@
-import { createShapeModule } from "./bodies";
-import { applyVerletIntegration } from "./integration";
-import { applySimpleCollision } from "./collision";
-import { Vec2 } from "./util/vector";
-import { World } from "./interfaces";
+import { createShapeModule } from "./bodies.js";
+import { applyVerletIntegration,applyEulerIntegration } from "./integration.js";
+import { applySimpleCollision } from "./collision.js";
+import { Vec2 } from "./util/vector.js";
+import { World } from "./interfaces.js";
 
 function getRandomRange(max:number,min:number){
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -19,12 +19,12 @@ export function populateWorld(world:World,nBodies:number){
         const random=Math.random();
         const randomPos=getRandomPos(world);
 
-        const randomSize=getRandomRange(10,50);
+        const randomSize=getRandomRange(1,10);
         if (random<0.5){ 
-            world.bodies.push(ShapeModule.createCircle(randomSize,randomPos));
+            world.bodies.push(ShapeModule.createCircle(randomSize,randomPos,randomPos));
            
         }else{
-            world.bodies.push(ShapeModule.createSquare(randomSize,randomPos));
+            world.bodies.push(ShapeModule.createSquare(randomSize,randomPos,randomPos));
 
         }
         
@@ -46,7 +46,8 @@ export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInte
 
 export function simulateWorld(world:World){
     if(world.isPause){return;}
-    applyVerletIntegration(world);
+    // applyVerletIntegration(world);
+    applyEulerIntegration(world);
     applySimpleCollision(world);
 }
 

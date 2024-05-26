@@ -1,8 +1,8 @@
-import { BoundaryType, Vector2D, World } from "./interfaces";
+import { BoundaryType, Vector2D, World } from "./interfaces.js";
 
 export function drawRectangle(ctx:CanvasRenderingContext2D,position:Vector2D,height:number,width:number=height){
     const {x,y}=position;//center at x,y
-    ctx.fillStyle="grey";
+    // ctx.fillStyle="grey";
     ctx.fillRect(x-length/2, y-length/2, length, length);
 }
 
@@ -10,8 +10,9 @@ export function drawCircle(ctx:CanvasRenderingContext2D,position:Vector2D,radius
     const {x,y}= position;
     ctx.beginPath();
     ctx.arc(x,y, radius,0,2*Math.PI);
-    ctx.fillStyle="grey";
-    ctx.fill();
+    ctx.stroke()
+    // ctx.fillStyle="grey";
+    // ctx.fill();
 
 }
 // function drawCircularBoundary(ctx:CanvasRenderingContext2D,radius:number,pos:Vector2D){

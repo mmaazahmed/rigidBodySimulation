@@ -12,7 +12,7 @@ export function Vec2(x = 0, y = 0) {
         y,
         magnitude,
         normalize,
-        copy: (vec2) => Vec2(vec2.x, vec2.y),
+        copy: () => Vec2(x, y),
         add: (vec2) => Vec2(x += vec2.x, y += vec2.y),
         sub: (vec2) => Vec2(x -= vec2.x, y -= vec2.y),
         scalerMult: (mult) => Vec2(x * mult, y * mult)

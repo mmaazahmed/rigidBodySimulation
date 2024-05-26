@@ -1,6 +1,6 @@
-import { Vec2 } from "./util/vector";
-import { drawCircle,drawRectangle } from "./renderer";
-import {  PhysicalBody, Vector2D } from "./interfaces";
+import { Vec2 } from "./util/vector.js";
+import { drawCircle,drawRectangle } from "./renderer.js";
+import {  PhysicalBody, Vector2D } from "./interfaces.js";
 function createIdGenerator(){
     let value=0;
     return ()=>value++;
@@ -27,20 +27,19 @@ function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,a
     const circle={
         id:getNextId(),
         previousPosition: Vec2(),
-        currentPosition,
+        currentPosition:currentPosition.copy(),
         size:radius ,
-        velocity,
-        acceleration,
+        velocity:velocity.copy(),
+        acceleration:acceleration.copy(),
         mass,
         draw(ctx:CanvasRenderingContext2D){
             drawCircle(ctx,this.currentPosition,this.size);
         },
         updatePosition(newPosition:Vector2D){
-            this.previousPosition=this.currentPosition;
-            this.currentPosition=newPosition;
+            this.previousPosition=this.currentPosition.copy();
+            this.currentPosition=newPosition.copy();
         }
     };
-    // console.log(test)
     return circle;
 }
 
@@ -54,17 +53,17 @@ function createSquare(
     const square={
         id :getNextId(),
         size:length,
-        currentPosition,
         previousPosition: Vec2(),
-        velocity,
-        acceleration,
+        currentPosition:currentPosition.copy(),
+        velocity:velocity.copy(),
+        acceleration:acceleration.copy(),
         mass,
         draw(ctx:CanvasRenderingContext2D){
             drawRectangle(ctx,this.currentPosition,this.size);
         },
         updatePosition(newPosition:Vector2D){
-            this.previousPosition=this.currentPosition;
-            this.currentPosition=newPosition;
+            this.previousPosition=this.currentPosition.copy();
+            this.currentPosition=newPosition.copy();
         }
     };
     return square;

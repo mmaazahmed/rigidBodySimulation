@@ -1,4 +1,4 @@
-import { World } from "./interfaces";
+import { World } from "./interfaces.js";
 
 function getMousePosOnBoard(world:World, event:MouseEvent) {
     const canvasRect = world.ctx.canvas.getBoundingClientRect();

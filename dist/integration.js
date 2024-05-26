@@ -1,11 +1,20 @@
+// import { Vec2 } from "./util/vector.js";
 export function applyVerletIntegration(world) {
-    const dt = world.timeStep;
+    const dtSquared = world.timeStep * world.timeStep; // Square the time step
     for (const body of world.bodies) {
         const velocity = body.currentPosition.sub(body.previousPosition);
-        // const newPosition=body.currentPosition.add(body.velocity.scalerMult(timeStep*timeStep))
-        const newPosition = body.currentPosition
-            .add(velocity)
-            .add(body.acceleration.scalerMult(dt * dt));
+        console.log(velocity);
+        const newPosition = body.currentPosition.add(velocity);
+        body.updatePosition(newPosition);
+    }
+}
+export function applyEulerIntegration(world) {
+    const dt = world.timeStep; // Get the time step from the world
+    for (const body of world.bodies) {
+        // Update velocity using acceleration
+        body.velocity = body.velocity.add(body.acceleration.scalerMult(dt));
+        // Update position using velocity
+        const newPosition = body.currentPosition.add(body.velocity.scalerMult(dt));
         body.updatePosition(newPosition);
     }
 }

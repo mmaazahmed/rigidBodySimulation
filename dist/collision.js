@@ -1,5 +1,5 @@
-import { BoundaryType } from "./interfaces";
-import { Vec2 } from "./util/vector";
+import { BoundaryType } from "./interfaces.js";
+import { Vec2 } from "./util/vector.js";
 function createCircularBoundary(world, radius, position) {
     const { x, y } = position;
     const boundary = {
@@ -56,18 +56,29 @@ function handleSimpleCollision(world, boundary) {
             continue;
         }
         if (bodyTop <= top) {
+            console.log(`before top col${body.velocity.y}`)
             body.velocity.y *= -1;
+            console.log(`after top col ${body.velocity.y}`)
         }
+        
         else if (bodyBottom >= bottom) {
+            console.log(`before bottom col${body.velocity.y}`)
             body.velocity.y *= -1;
+            console.log(`after bottom col ${body.velocity.y}`)
         }
         else if (bodyLeft >= left) {
+            console.log(`before left col ${body.velocity.y}`)
             body.velocity.x *= -1;
+            console.log(`after  left col ${body.velocity.y}`)
         }
         else if (bodyRight >= right) {
+            console.log(`before rright col ${body.velocity.y}`)
             body.velocity.x *= -1;
+            console.log(`after  right col ${body.velocity.y}`)
+            // console.log(body.velocity)
         }
     }
+    // console.log(world.bodies[0].velocity)
 }
 export function applySimpleCollision(world) {
     for (const boundary of world.boundaries) {

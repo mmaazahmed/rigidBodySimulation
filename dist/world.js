@@ -1,26 +1,26 @@
-import { createShapeModule } from "./bodies";
-import { applyVerletIntegration } from "./integration";
-import { applySimpleCollision } from "./collision";
-import { Vec2 } from "./util/vector";
+import { createShapeModule } from "./bodies.js";
+import { applyVerletIntegration,applyEulerIntegration } from "./integration.js";
+import { applySimpleCollision } from "./collision.js";
+import { Vec2 } from "./util/vector.js";
 function getRandomRange(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function getRandomPos(world) {
-    const x = getRandomRange(2000 - 10, 0);
-    const y = getRandomRange(2000 - 10, 0);
+function getRandomPos(world,pos) {
+    const x = getRandomRange(pos.x-500, pos.x+500);
+    const y = getRandomRange(pos.x-500, pos.x+500);
     return Vec2(x, y);
 }
-export function populateWorld(world, nBodies) {
+export function populateWorld(world, nBodies,pos) {
     const ShapeModule = createShapeModule();
     for (let i = 0; i < nBodies; i++) {
         const random = Math.random();
-        const randomPos = getRandomPos(world);
-        const randomSize = getRandomRange(10, 50);
+        const randomPos = getRandomPos(world,pos);
+        const randomSize = getRandomRange(1, 10);
         if (random < 0.5) {
-            world.bodies.push(ShapeModule.createCircle(randomSize, randomPos));
+            world.bodies.push(ShapeModule.createCircle(randomSize, randomPos, randomPos));
         }
         else {
-            world.bodies.push(ShapeModule.createSquare(randomSize, randomPos));
+            world.bodies.push(ShapeModule.createSquare(randomSize, randomPos, randomPos));
         }
     }
 }
@@ -40,7 +40,8 @@ export function simulateWorld(world) {
     if (world.isPause) {
         return;
     }
-    applyVerletIntegration(world);
+    // applyVerletIntegration(world);
+    applyEulerIntegration(world);
     applySimpleCollision(world);
 }
 // function animate(){

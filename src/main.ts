@@ -1,10 +1,10 @@
 
-import { createWorld,simulateWorld,populateWorld } from "./world";
-import { renderWorld } from "./renderer";
+import { createWorld,simulateWorld,populateWorld } from "./world.js";
+import { renderWorld } from "./renderer.js";
 // import { applyVerletIntegration } from "./integration";
-import { applySimpleCollision,createBoundaryModule} from "./collision";
-import { initialiseInputListeners } from "./input";
-import { Vec2 } from "./util/vector";
+import { applySimpleCollision,createBoundaryModule} from "./collision.js";
+import { initialiseInputListeners } from "./input.js";
+import { Vec2 } from "./util/vector.js";
 
 const canvas:HTMLCanvasElement= document.getElementById("mycanvas")as HTMLCanvasElement ;
 canvas.style.background="pink";
@@ -13,14 +13,14 @@ const ctx:CanvasRenderingContext2D=canvas.getContext("2d")!;
 const {width,height}=canvas;
 
 
-const nBodies=10;
-const world =createWorld(ctx);
+const nBodies=1000;
+const world =createWorld(ctx,0.01);
 populateWorld(world,nBodies);
 initialiseInputListeners(world);
 const BoundaryModule=createBoundaryModule();
 const pos=Vec2(canvas.width/4,canvas.height/4)
 const pos2=Vec2(Math.floor(width),Math.floor(height))
-BoundaryModule.rectangular(world,3000,500,pos);
+// BoundaryModule.rectangular(world,3000,500,pos);
 BoundaryModule.circular(world,500,pos);
 
 // BoundaryModule.rectangular(world,1,pos2);

@@ -1,4 +1,4 @@
-import { Vector2D } from "../interfaces";
+import { Vector2D } from "../interfaces.js";
 
 export function Vec2(x = 0, y = 0): Vector2D {
     const magnitude = () => Math.sqrt(x * x + y * y);
@@ -16,7 +16,7 @@ export function Vec2(x = 0, y = 0): Vector2D {
         y,
         magnitude,
         normalize,
-        copy:(vec2:Vector2D)=> Vec2(vec2.x,vec2.y),
+        copy:()=> Vec2(x,y),
         add:(vec2: Vector2D)=> Vec2(x+= vec2.x, y+= vec2.y),
         sub:(vec2: Vector2D)=> Vec2(x-= vec2.x, y-= vec2.y),
         scalerMult:(mult:number)=>Vec2(x*mult,y*mult)
