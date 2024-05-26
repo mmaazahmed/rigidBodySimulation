@@ -1,0 +1,8 @@
+{
+  "name": "rigidBodySimulation",
+  "version": "1.0.0",
+  "main": "main.js",
+  "repository": "https://github.com/mmaazahmed/rigidBodySimulation.git",
+  "author": "mmaazahmed <maazahmedpoke@gmail.com>",
+  "license": "MIT"
+}
