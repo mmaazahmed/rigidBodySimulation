@@ -1,5 +1,5 @@
-import { Vec2 } from "./util/vector.js";
-import { drawCircle, drawRectangle } from "./renderer.js";
+import { Vec2 } from "./util/vector";
+import { drawCircle, drawRectangle } from "./renderer";
 function createIdGenerator() {
     let value = 0;
     return () => value++;

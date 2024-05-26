@@ -1,4 +1,3 @@
-// import { addVec2,subVec2 } from "./util/vector.js";
 export function applyVerletIntegration(world) {
     const dt = world.timeStep;
     for (const body of world.bodies) {

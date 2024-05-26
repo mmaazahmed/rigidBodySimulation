@@ -2,7 +2,7 @@ import { createWorld, simulateWorld, populateWorld } from "./world";
 import { renderWorld } from "./renderer";
 // import { applyVerletIntegration } from "./integration";
 import { createBoundaryModule } from "./collision";
-import { initialiseInputListeners } from "./input.js";
+import { initialiseInputListeners } from "./input";
 import { Vec2 } from "./util/vector";
 const canvas = document.getElementById("mycanvas");
 canvas.style.background = "pink";

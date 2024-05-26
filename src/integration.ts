@@ -1,7 +1,6 @@
 import { PhysicalBody, World } from "./interfaces";
 import { Vec2 } from "./util/vector";
 
-// import { addVec2,subVec2 } from "./util/vector.js";
 export function applyVerletIntegration(world:World){
     const dt=world.timeStep;
     for (const body of world.bodies){
