@@ -1,7 +1,7 @@
 
 import { createWorld,simulateWorld,populateWorld } from "./world";
 import { renderWorld } from "./renderer";
-import { applyVerletIntegration,applyEularIntegration } from "./integration";
+// import { applyVerletIntegration } from "./integration";
 import { applySimpleCollision,createBoundaryModule} from "./collision";
 import { initialiseInputListeners } from "./input.js";
 import { Vec2 } from "./util/vector";

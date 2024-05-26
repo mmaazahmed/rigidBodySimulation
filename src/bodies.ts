@@ -26,7 +26,7 @@ const getNextId=createIdGenerator();
 function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,acceleration:Vector2D,mass:number):PhysicalBody{
     const circle={
         id:getNextId(),
-        prevPosition: Vec2(),
+        previousPosition: Vec2(),
         currentPosition,
         size:radius ,
         velocity,
@@ -36,7 +36,7 @@ function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,a
             drawCircle(ctx,this.currentPosition,this.size);
         },
         updatePosition(newPosition:Vector2D){
-            this.prevPosition=this.currentPosition;
+            this.previousPosition=this.currentPosition;
             this.currentPosition=newPosition;
         }
     };
@@ -55,7 +55,7 @@ function createSquare(
         id :getNextId(),
         size:length,
         currentPosition,
-        prevPosition: Vec2(),
+        previousPosition: Vec2(),
         velocity,
         acceleration,
         mass,
@@ -63,7 +63,7 @@ function createSquare(
             drawRectangle(ctx,this.currentPosition,this.size);
         },
         updatePosition(newPosition:Vector2D){
-            this.prevPosition=this.currentPosition;
+            this.previousPosition=this.currentPosition;
             this.currentPosition=newPosition;
         }
     };

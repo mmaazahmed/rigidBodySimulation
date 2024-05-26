@@ -15,12 +15,11 @@ export function Vec2(x = 0, y = 0): Vector2D {
         x,
         y,
         magnitude,
-        normalize: function () {
-            return normalize();
-        },
-        add: function (vec: Vector2D) {
-            return Vec2(x + vec.x, y + vec.y);
-        },
+        normalize,
+        copy:(vec2:Vector2D)=> Vec2(vec2.x,vec2.y),
+        add:(vec2: Vector2D)=> Vec2(x+= vec2.x, y+= vec2.y),
+        sub:(vec2: Vector2D)=> Vec2(x-= vec2.x, y-= vec2.y),
+        scalerMult:(mult:number)=>Vec2(x*mult,y*mult)
     };
 }
 export function normalise(vec:Vector2D){

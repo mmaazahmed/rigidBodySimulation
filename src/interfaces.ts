@@ -28,7 +28,7 @@ export interface World{
 export interface PhysicalBody{
     id:number,
     currentPosition:Vector2D,
-    prevPosition:Vector2D,
+    previousPosition:Vector2D,
     size:number,
     velocity:Vector2D,
     acceleration:Vector2D,
@@ -42,7 +42,9 @@ export interface Vector2D{
     x:number,
     y:number,
     magnitude():number
-    normalize:Vector2D
-    add:Vector2D,
-    sub:Vector2D
+    copy(vec2:Vector2D):Vector2D
+    normalize(vec2:Vector2D):Vector2D,
+    add(vec2:Vector2D):Vector2D,
+    sub(vec2:Vector2D):Vector2D,
+    scalerMult(mult:number):Vector2D,
 }
