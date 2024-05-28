@@ -1,4 +1,4 @@
-import { BoundaryType, Vector2D, World } from "./interfaces.js";
+import { BoundaryType, Vector2D, World } from "./interfaces";
 
 export function drawRectangle(ctx:CanvasRenderingContext2D,position:Vector2D,height:number,width:number=height){
     const {x,y}=position;//center at x,y
@@ -33,7 +33,7 @@ function drawObjects(world:World){
 }
 
 function drawBoundaries(world:World){
-    const {ctx}=world;
+    // const {ctx}=world;
     for (const boundary of world.boundaries){
         if (boundary.type===BoundaryType.Rectangular){
             if(!boundary.height || ! boundary.width){throw new Error(`${boundary.type} has dimensions:${boundary.height,boundary.width}`)}

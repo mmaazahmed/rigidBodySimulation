@@ -1,5 +1,6 @@
-import { PhysicalBody, World } from "./interfaces.js";
-// import { Vec2 } from "./util/vector.js";
+import { World } from "./interfaces";
+// import { PhysicalBody, World } from "./interfaces";
+// import { Vec2 } from "./util/vector";
 
 export function applyVerletIntegration(world: World): void {
     const dtSquared = world.timeStep * world.timeStep; // Square the time step

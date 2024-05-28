@@ -1,8 +1,9 @@
-import { createShapeModule } from "./bodies.js";
-import { applyVerletIntegration,applyEulerIntegration } from "./integration.js";
-import { applySimpleCollision } from "./collision.js";
-import { Vec2 } from "./util/vector.js";
-import { World } from "./interfaces.js";
+import { createShapeModule } from "./bodies";
+import { applyEulerIntegration } from "./integration";
+// import { applyVerletIntegration,applyEulerIntegration } from "./integration";
+import { applySimpleCollision } from "./collision";
+import { Vec2 } from "./util/vector";
+import { World } from "./interfaces";
 
 function getRandomRange(max:number,min:number){
     return Math.floor(Math.random() * (max - min + 1)) + min;

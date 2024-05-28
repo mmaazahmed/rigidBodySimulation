@@ -1,10 +1,13 @@
-import { BoundaryType } from "./interfaces.js";
-import { Vec2 } from "./util/vector.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.applySimpleCollision = exports.createBoundaryModule = void 0;
+const interfaces_1 = require("./interfaces");
+const vector_1 = require("./util/vector");
 function createCircularBoundary(world, radius, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: BoundaryType.Circular,
+        type: interfaces_1.BoundaryType.Circular,
         radius,
         top: y - radius,
         bottom: y + radius,
@@ -17,7 +20,7 @@ function createRectangularBoundary(world, width, height, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: BoundaryType.Rectangular,
+        type: interfaces_1.BoundaryType.Rectangular,
         width,
         height,
         top: y,
@@ -27,16 +30,17 @@ function createRectangularBoundary(world, width, height, position) {
     };
     world.boundaries.push(boundary);
 }
-export function createBoundaryModule() {
+function createBoundaryModule() {
     return {
-        circular: (world, radius = 500, position = Vec2(1, 1)) => {
+        circular: (world, radius = 500, position = (0, vector_1.Vec2)(1, 1)) => {
             return createCircularBoundary(world, radius, position);
         },
-        rectangular: (world, width = 300, height = 400, position = Vec2(1, 1)) => {
+        rectangular: (world, width = 300, height = 400, position = (0, vector_1.Vec2)(1, 1)) => {
             return createRectangularBoundary(world, width, height, position);
         }
     };
 }
+exports.createBoundaryModule = createBoundaryModule;
 function isInsideBoundary(body, boundary) {
     const { top, bottom, left, right } = boundary;
     const bodyBottom = body.currentPosition.y + body.size;
@@ -56,32 +60,24 @@ function handleSimpleCollision(world, boundary) {
             continue;
         }
         if (bodyTop <= top) {
-            console.log(`before top col${body.velocity.y}`)
+            console.log('here');
             body.velocity.y *= -1;
-            console.log(`after top col ${body.velocity.y}`)
         }
-        
         else if (bodyBottom >= bottom) {
-            console.log(`before bottom col${body.velocity.y}`)
             body.velocity.y *= -1;
-            console.log(`after bottom col ${body.velocity.y}`)
         }
         else if (bodyLeft >= left) {
-            console.log(`before left col ${body.velocity.y}`)
             body.velocity.x *= -1;
-            console.log(`after  left col ${body.velocity.y}`)
         }
         else if (bodyRight >= right) {
-            console.log(`before rright col ${body.velocity.y}`)
             body.velocity.x *= -1;
-            console.log(`after  right col ${body.velocity.y}`)
-            // console.log(body.velocity)
         }
     }
-    // console.log(world.bodies[0].velocity)
 }
-export function applySimpleCollision(world) {
+function applySimpleCollision(world) {
     for (const boundary of world.boundaries) {
         handleSimpleCollision(world, boundary);
     }
 }
+exports.applySimpleCollision = applySimpleCollision;
+//# sourceMappingURL=collision.js.map

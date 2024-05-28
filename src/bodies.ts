@@ -1,6 +1,6 @@
-import { Vec2 } from "./util/vector.js";
-import { drawCircle,drawRectangle } from "./renderer.js";
-import {  PhysicalBody, Vector2D } from "./interfaces.js";
+import { Vec2 } from "./util/vector";
+import { drawCircle,drawRectangle } from "./renderer";
+import {  PhysicalBody, Vector2D } from "./interfaces";
 function createIdGenerator(){
     let value=0;
     return ()=>value++;

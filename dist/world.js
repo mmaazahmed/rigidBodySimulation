@@ -1,20 +1,24 @@
-import { createShapeModule } from "./bodies.js";
-import { applyVerletIntegration,applyEulerIntegration } from "./integration.js";
-import { applySimpleCollision } from "./collision.js";
-import { Vec2 } from "./util/vector.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.simulateWorld = exports.createWorld = exports.populateWorld = void 0;
+const bodies_1 = require("./bodies");
+const integration_1 = require("./integration");
+// import { applyVerletIntegration,applyEulerIntegration } from "./integration";
+const collision_1 = require("./collision");
+const vector_1 = require("./util/vector");
 function getRandomRange(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function getRandomPos(world,pos) {
-    const x = getRandomRange(pos.x-500, pos.x+500);
-    const y = getRandomRange(pos.x-500, pos.x+500);
-    return Vec2(x, y);
+function getRandomPos(world) {
+    const x = getRandomRange(2000 - 10, 0);
+    const y = getRandomRange(2000 - 10, 0);
+    return (0, vector_1.Vec2)(x, y);
 }
-export function populateWorld(world, nBodies,pos) {
-    const ShapeModule = createShapeModule();
+function populateWorld(world, nBodies) {
+    const ShapeModule = (0, bodies_1.createShapeModule)();
     for (let i = 0; i < nBodies; i++) {
         const random = Math.random();
-        const randomPos = getRandomPos(world,pos);
+        const randomPos = getRandomPos(world);
         const randomSize = getRandomRange(1, 10);
         if (random < 0.5) {
             world.bodies.push(ShapeModule.createCircle(randomSize, randomPos, randomPos));
@@ -24,7 +28,8 @@ export function populateWorld(world, nBodies,pos) {
         }
     }
 }
-export function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
+exports.populateWorld = populateWorld;
+function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
     return {
         ctx,
         timeStep,
@@ -36,14 +41,16 @@ export function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
         displayDx: 0
     };
 }
-export function simulateWorld(world) {
+exports.createWorld = createWorld;
+function simulateWorld(world) {
     if (world.isPause) {
         return;
     }
     // applyVerletIntegration(world);
-    applyEulerIntegration(world);
-    applySimpleCollision(world);
+    (0, integration_1.applyEulerIntegration)(world);
+    (0, collision_1.applySimpleCollision)(world);
 }
+exports.simulateWorld = simulateWorld;
 // function animate(){
 //     requestAnimationFrame(animate);
 //     update(world);
@@ -51,3 +58,4 @@ export function simulateWorld(world) {
 // }
 // // circle.draw/(ctx);
 // animate();
+//# sourceMappingURL=world.js.map

@@ -1,8 +1,32 @@
 {
-  "name": "rigidBodySimulation",
+  "name": "rigid-body-simulation",
   "version": "1.0.0",
   "main": "main.js",
   "repository": "https://github.com/mmaazahmed/rigidBodySimulation.git",
   "author": "mmaazahmed <maazahmedpoke@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "nodemonConfig": {
+    "watch": [
+      "./src"
+    ],
+    "exec": "ts-node ./src/localServer.ts",
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.test.ts"
+    ],
+    "delay": "1000"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "html-webpack-plugin": "^5.6.0",
+    "nodemon": "^3.1.1",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
 }

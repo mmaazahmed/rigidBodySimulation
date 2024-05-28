@@ -1,5 +1,5 @@
-import { PhysicalBody, Boundary,BoundaryType, Vector2D, World } from "./interfaces.js";
-import { Vec2 } from "./util/vector.js";
+import { PhysicalBody, Boundary,BoundaryType, Vector2D, World } from "./interfaces";
+import { Vec2 } from "./util/vector";
 
 function createCircularBoundary(world:World,radius:number,position:Vector2D){
     const {x,y}=position;

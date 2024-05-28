@@ -1,4 +1,4 @@
-import { Vector2D } from "../interfaces.js";
+import { Vector2D } from "../interfaces";
 
 export function Vec2(x = 0, y = 0): Vector2D {
     const magnitude = () => Math.sqrt(x * x + y * y);
