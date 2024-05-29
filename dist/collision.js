@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.applySimpleCollision = exports.createBoundaryModule = void 0;
-const interfaces_js_1 = require("./interfaces.js");
-const vector_js_1 = require("./util/vector.js");
+import { BoundaryType } from "./interfaces.js";
+import { Vec2 } from "./util/vector.js";
 function createCircularBoundary(world, radius, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: interfaces_js_1.BoundaryType.Circular,
+        type: BoundaryType.Circular,
         radius,
         top: y - radius,
         bottom: y + radius,
@@ -20,7 +17,7 @@ function createRectangularBoundary(world, width, height, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: interfaces_js_1.BoundaryType.Rectangular,
+        type: BoundaryType.Rectangular,
         width,
         height,
         top: y,
@@ -30,17 +27,16 @@ function createRectangularBoundary(world, width, height, position) {
     };
     world.boundaries.push(boundary);
 }
-function createBoundaryModule() {
+export function createBoundaryModule() {
     return {
-        circular: (world, radius = 500, position = (0, vector_js_1.Vec2)(1, 1)) => {
+        circular: (world, radius = 500, position = Vec2(1, 1)) => {
             return createCircularBoundary(world, radius, position);
         },
-        rectangular: (world, width = 300, height = 400, position = (0, vector_js_1.Vec2)(1, 1)) => {
+        rectangular: (world, width = 300, height = 400, position = Vec2(1, 1)) => {
             return createRectangularBoundary(world, width, height, position);
         }
     };
 }
-exports.createBoundaryModule = createBoundaryModule;
 function isInsideBoundary(body, boundary) {
     const { top, bottom, left, right } = boundary;
     const bodyBottom = body.currentPosition.y + body.size;
@@ -74,9 +70,8 @@ function handleSimpleCollision(world, boundary) {
         }
     }
 }
-function applySimpleCollision(world) {
+export function applySimpleCollision(world) {
     for (const boundary of world.boundaries) {
         handleSimpleCollision(world, boundary);
     }
 }
-exports.applySimpleCollision = applySimpleCollision;

@@ -1,15 +1,19 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const app = (0, express_1.default)();
+import express from 'express';
+const app = express();
 const port = 8080;
-app.use(express_1.default.static('public'));
+// const getAbsolutePath=(fileName:string)=>{
+//   const cwd=process.cwd();
+//   // console.log("cwd",cwd)
+//   // const lastSlashIndex = cwd.lastIndexOf('/');
+//   // const absolutePath = lastSlashIndex !== -1 ? cwd.substring(0, lastSlashIndex + 1) : cwd;
+//   const absolutePath = `${cwd}/`;
+//   return absolutePath + fileName;
+// }
+app.use(express.static('dist'));
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: 'public' });
+    const indexPath = 'index.html';
+    res.sendFile(indexPath, { root: process.cwd() });
 });
 app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });

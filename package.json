@@ -5,6 +5,7 @@
   "repository": "https://github.com/mmaazahmed/rigidBodySimulation.git",
   "author": "mmaazahmed <maazahmedpoke@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "nodemonConfig": {
     "watch": [
       "./src"

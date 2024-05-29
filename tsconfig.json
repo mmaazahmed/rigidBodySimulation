@@ -14,11 +14,10 @@
 // }
 {
   "compilerOptions": {
-    "lib": ["es2016", "esnext.asynciterable","DOM"],
-    // "target": "es6",
+    "lib": ["es2016","DOM"],
+    "target": "ES6",                      // Set to ES6 or later
+    "module": "ES6",
     // "module": "commonjs",
-    "target": "ESNext",
-    "module": "commonjs",
     "esModuleInterop": true,
     "outDir": "./dist",
         // "esModuleInterop": true,

@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createShapeModule = void 0;
-const vector_js_1 = require("./util/vector.js");
-const renderer_js_1 = require("./renderer.js");
+import { Vec2 } from "./util/vector.js";
+import { drawCircle, drawRectangle } from "./renderer.js";
 function createIdGenerator() {
     let value = 0;
     return () => value++;
@@ -23,14 +20,14 @@ const getNextId = createIdGenerator();
 function createCircle(radius, currentPosition, velocity, acceleration, mass) {
     const circle = {
         id: getNextId(),
-        previousPosition: (0, vector_js_1.Vec2)(),
+        previousPosition: Vec2(),
         currentPosition: currentPosition.copy(),
         size: radius,
         velocity: velocity.copy(),
         acceleration: acceleration.copy(),
         mass,
         draw(ctx) {
-            (0, renderer_js_1.drawCircle)(ctx, this.currentPosition, this.size);
+            drawCircle(ctx, this.currentPosition, this.size);
         },
         updatePosition(newPosition) {
             this.previousPosition = this.currentPosition.copy();
@@ -43,13 +40,13 @@ function createSquare(length, currentPosition, velocity, acceleration, mass) {
     const square = {
         id: getNextId(),
         size: length,
-        previousPosition: (0, vector_js_1.Vec2)(),
+        previousPosition: Vec2(),
         currentPosition: currentPosition.copy(),
         velocity: velocity.copy(),
         acceleration: acceleration.copy(),
         mass,
         draw(ctx) {
-            (0, renderer_js_1.drawRectangle)(ctx, this.currentPosition, this.size);
+            drawRectangle(ctx, this.currentPosition, this.size);
         },
         updatePosition(newPosition) {
             this.previousPosition = this.currentPosition.copy();
@@ -58,17 +55,16 @@ function createSquare(length, currentPosition, velocity, acceleration, mass) {
     };
     return square;
 }
-function createShapeModule() {
+export function createShapeModule() {
     return {
-        createCircle: (size, position = (0, vector_js_1.Vec2)(), velocity = (0, vector_js_1.Vec2)(), acceleration = (0, vector_js_1.Vec2)(0, 10), mass = 1) => {
+        createCircle: (size, position = Vec2(), velocity = Vec2(), acceleration = Vec2(0, 10), mass = 1) => {
             return createCircle(size, position, velocity, acceleration, mass);
         },
-        createSquare: (size, position = (0, vector_js_1.Vec2)(), velocity = (0, vector_js_1.Vec2)(), acceleration = (0, vector_js_1.Vec2)(0, 10), mass = 1) => {
+        createSquare: (size, position = Vec2(), velocity = Vec2(), acceleration = Vec2(0, 10), mass = 1) => {
             return createSquare(size, position, velocity, acceleration, mass);
         }
     };
 }
-exports.createShapeModule = createShapeModule;
 // export function createShapeFromName(shapeName:string,size:number,position:Vector2D){
 //     switch(shapeName){
 //         case 'square':

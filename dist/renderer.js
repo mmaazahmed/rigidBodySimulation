@@ -1,14 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.renderWorld = exports.drawCircle = exports.drawRectangle = void 0;
-const interfaces_js_1 = require("./interfaces.js");
-function drawRectangle(ctx, position, height, width = height) {
+import { BoundaryType } from "./interfaces.js";
+export function drawRectangle(ctx, position, height, width = height) {
     const { x, y } = position; //center at x,y
     // ctx.fillStyle="grey";
     ctx.fillRect(x - length / 2, y - length / 2, length, length);
 }
-exports.drawRectangle = drawRectangle;
-function drawCircle(ctx, position, radius) {
+export function drawCircle(ctx, position, radius) {
     const { x, y } = position;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -16,7 +12,6 @@ function drawCircle(ctx, position, radius) {
     // ctx.fillStyle="grey";
     // ctx.fill();
 }
-exports.drawCircle = drawCircle;
 // function drawCircularBoundary(ctx:CanvasRenderingContext2D,radius:number,pos:Vector2D){
 //     const {x,y}= boundary.position;
 //     ctx.beginPath();
@@ -35,19 +30,19 @@ function drawObjects(world) {
 function drawBoundaries(world) {
     // const {ctx}=world;
     for (const boundary of world.boundaries) {
-        if (boundary.type === interfaces_js_1.BoundaryType.Rectangular) {
+        if (boundary.type === BoundaryType.Rectangular) {
             if (!boundary.height || !boundary.width) {
                 throw new Error(`${boundary.type} has dimensions:${boundary.height, boundary.width}`);
             }
             drawRectangle(world.ctx, boundary.position, boundary.height, boundary.width);
         }
-        if (boundary.type === interfaces_js_1.BoundaryType.Square) {
+        if (boundary.type === BoundaryType.Square) {
             if (!boundary.length) {
                 throw new Error(`${boundary.type} has dimensions:${boundary.length}`);
             }
             drawRectangle(world.ctx, boundary.position, boundary.length);
         }
-        if (boundary.type === interfaces_js_1.BoundaryType.Circular) {
+        if (boundary.type === BoundaryType.Circular) {
             if (!boundary.radius) {
                 throw new Error(`boundary has radius:${boundary.radius}`);
             }
@@ -55,9 +50,8 @@ function drawBoundaries(world) {
         }
     }
 }
-function renderWorld(world, width, height) {
+export function renderWorld(world, width, height) {
     clearCanvas(world, width, height);
     drawBoundaries(world);
     drawObjects(world);
 }
-exports.renderWorld = renderWorld;
