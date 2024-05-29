@@ -1,18 +1,21 @@
-import { createShapeModule } from "./bodies.js";
-import { applyEulerIntegration } from "./integration.js";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.simulateWorld = exports.createWorld = exports.populateWorld = void 0;
+const bodies_js_1 = require("./bodies.js");
+const integration_js_1 = require("./integration.js");
 // import { applyVerletIntegration,applyEulerIntegration } from "./integration";
-import { applySimpleCollision } from "./collision.js";
-import { Vec2 } from "./util/vector.js";
+const collision_js_1 = require("./collision.js");
+const vector_js_1 = require("./util/vector.js");
 function getRandomRange(max, min) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 function getRandomPos(world) {
     const x = getRandomRange(2000 - 10, 0);
     const y = getRandomRange(2000 - 10, 0);
-    return Vec2(x, y);
+    return (0, vector_js_1.Vec2)(x, y);
 }
-export function populateWorld(world, nBodies) {
-    const ShapeModule = createShapeModule();
+function populateWorld(world, nBodies) {
+    const ShapeModule = (0, bodies_js_1.createShapeModule)();
     for (let i = 0; i < nBodies; i++) {
         const random = Math.random();
         const randomPos = getRandomPos(world);
@@ -25,7 +28,8 @@ export function populateWorld(world, nBodies) {
         }
     }
 }
-export function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
+exports.populateWorld = populateWorld;
+function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
     return {
         ctx,
         timeStep,
@@ -37,14 +41,16 @@ export function createWorld(ctx, timeStep = 0.1, updateInterval = 60) {
         displayDx: 0
     };
 }
-export function simulateWorld(world) {
+exports.createWorld = createWorld;
+function simulateWorld(world) {
     if (world.isPause) {
         return;
     }
     // applyVerletIntegration(world);
-    applyEulerIntegration(world);
-    applySimpleCollision(world);
+    (0, integration_js_1.applyEulerIntegration)(world);
+    (0, collision_js_1.applySimpleCollision)(world);
 }
+exports.simulateWorld = simulateWorld;
 // function animate(){
 //     requestAnimationFrame(animate);
 //     update(world);

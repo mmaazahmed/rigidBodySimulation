@@ -1,5 +1,10 @@
-import express from 'express';
-const app = express();
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
 const port = 8080;
 // const getAbsolutePath=(fileName:string)=>{
 //   const cwd=process.cwd();
@@ -9,7 +14,7 @@ const port = 8080;
 //   const absolutePath = `${cwd}/`;
 //   return absolutePath + fileName;
 // }
-app.use(express.static('dist'));
+app.use(express_1.default.static('dist'));
 app.get('/', (req, res) => {
     const indexPath = 'index.html';
     res.sendFile(indexPath, { root: process.cwd() });
