@@ -1,4 +1,4 @@
-import { BoundaryType, Vector2D, World } from "./interfaces";
+import { BoundaryType, Vector2D, World } from "./interfaces.js";
 
 export function drawRectangle(ctx:CanvasRenderingContext2D,position:Vector2D,height:number,width:number=height){
     const {x,y}=position;//center at x,y

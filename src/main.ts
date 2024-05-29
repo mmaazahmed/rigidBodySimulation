@@ -1,10 +1,10 @@
 
-import { createWorld,simulateWorld,populateWorld } from "./world";
-import { renderWorld } from "./renderer";
+import { createWorld,simulateWorld,populateWorld } from "./world.js";
+import { renderWorld } from "./renderer.js";
 // import { applyVerletIntegration } from "./integration";
-import { createBoundaryModule} from "./collision";
+import { createBoundaryModule} from "./collision.js";
 // import { initialiseInputListeners } from "./input";
-import { Vec2 } from "./util/vector";
+import { Vec2 } from "./util/vector.js";
 
 function getCanvasElement(): HTMLCanvasElement | null {
     if (typeof document !== 'undefined') {

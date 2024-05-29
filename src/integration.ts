@@ -1,4 +1,4 @@
-import { World } from "./interfaces";
+import { World } from "./interfaces.js";
 // import { PhysicalBody, World } from "./interfaces";
 // import { Vec2 } from "./util/vector";
 

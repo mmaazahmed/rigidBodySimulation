@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderWorld = exports.drawCircle = exports.drawRectangle = void 0;
-const interfaces_1 = require("./interfaces");
+const interfaces_js_1 = require("./interfaces.js");
 function drawRectangle(ctx, position, height, width = height) {
     const { x, y } = position; //center at x,y
     // ctx.fillStyle="grey";
@@ -35,19 +35,19 @@ function drawObjects(world) {
 function drawBoundaries(world) {
     // const {ctx}=world;
     for (const boundary of world.boundaries) {
-        if (boundary.type === interfaces_1.BoundaryType.Rectangular) {
+        if (boundary.type === interfaces_js_1.BoundaryType.Rectangular) {
             if (!boundary.height || !boundary.width) {
                 throw new Error(`${boundary.type} has dimensions:${boundary.height, boundary.width}`);
             }
             drawRectangle(world.ctx, boundary.position, boundary.height, boundary.width);
         }
-        if (boundary.type === interfaces_1.BoundaryType.Square) {
+        if (boundary.type === interfaces_js_1.BoundaryType.Square) {
             if (!boundary.length) {
                 throw new Error(`${boundary.type} has dimensions:${boundary.length}`);
             }
             drawRectangle(world.ctx, boundary.position, boundary.length);
         }
-        if (boundary.type === interfaces_1.BoundaryType.Circular) {
+        if (boundary.type === interfaces_js_1.BoundaryType.Circular) {
             if (!boundary.radius) {
                 throw new Error(`boundary has radius:${boundary.radius}`);
             }
@@ -61,4 +61,3 @@ function renderWorld(world, width, height) {
     drawObjects(world);
 }
 exports.renderWorld = renderWorld;
-//# sourceMappingURL=renderer.js.map

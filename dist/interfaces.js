@@ -7,4 +7,3 @@ var BoundaryType;
     BoundaryType[BoundaryType["Circular"] = 1] = "Circular";
     BoundaryType[BoundaryType["Square"] = 2] = "Square";
 })(BoundaryType || (exports.BoundaryType = BoundaryType = {}));
-//# sourceMappingURL=interfaces.js.map

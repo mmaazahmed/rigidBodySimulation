@@ -9,7 +9,6 @@
 //     // const { gridX, gridY } = { gridX: Math.floor(relativeX / cellSize), gridY: Math.floor(relativeY / cellSize) };
 //     return { worldX: worldX - world.displayDx, worldY: worldY - world.displayDy };
 //   }
-
 // export function initialiseInputListeners(world:World){
 //     document.addEventListener('keydown',(event)=>{
 //         if (event.key !== 'p'){return;}
@@ -24,4 +23,3 @@
 //         world.timeStep*=0.9;
 //     })
 // }
-//# sourceMappingURL=input.js.map

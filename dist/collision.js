@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.applySimpleCollision = exports.createBoundaryModule = void 0;
-const interfaces_1 = require("./interfaces");
-const vector_1 = require("./util/vector");
+const interfaces_js_1 = require("./interfaces.js");
+const vector_js_1 = require("./util/vector.js");
 function createCircularBoundary(world, radius, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: interfaces_1.BoundaryType.Circular,
+        type: interfaces_js_1.BoundaryType.Circular,
         radius,
         top: y - radius,
         bottom: y + radius,
@@ -20,7 +20,7 @@ function createRectangularBoundary(world, width, height, position) {
     const { x, y } = position;
     const boundary = {
         position,
-        type: interfaces_1.BoundaryType.Rectangular,
+        type: interfaces_js_1.BoundaryType.Rectangular,
         width,
         height,
         top: y,
@@ -32,10 +32,10 @@ function createRectangularBoundary(world, width, height, position) {
 }
 function createBoundaryModule() {
     return {
-        circular: (world, radius = 500, position = (0, vector_1.Vec2)(1, 1)) => {
+        circular: (world, radius = 500, position = (0, vector_js_1.Vec2)(1, 1)) => {
             return createCircularBoundary(world, radius, position);
         },
-        rectangular: (world, width = 300, height = 400, position = (0, vector_1.Vec2)(1, 1)) => {
+        rectangular: (world, width = 300, height = 400, position = (0, vector_js_1.Vec2)(1, 1)) => {
             return createRectangularBoundary(world, width, height, position);
         }
     };
@@ -80,4 +80,3 @@ function applySimpleCollision(world) {
     }
 }
 exports.applySimpleCollision = applySimpleCollision;
-//# sourceMappingURL=collision.js.map

@@ -56,4 +56,3 @@ exports.applyEulerIntegration = applyEulerIntegration;
 //         updateYpostionEular(body,dt);
 //     }
 // }
-//# sourceMappingURL=integration.js.map

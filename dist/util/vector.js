@@ -38,4 +38,3 @@ function sub(vec1, vec2) {
     return Vec2(vec1.x - vec2.x, vec1.y - vec2.y);
 }
 exports.sub = sub;
-//# sourceMappingURL=vector.js.map
