@@ -1,6 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.applyEulerIntegration = exports.applyVerletIntegration = void 0;
 // import { PhysicalBody, World } from "./interfaces";
 // import { Vec2 } from "./util/vector";
-export function applyVerletIntegration(world) {
+function applyVerletIntegration(world) {
     const dtSquared = world.timeStep * world.timeStep; // Square the time step
     for (const body of world.bodies) {
         const velocity = body.currentPosition.sub(body.previousPosition);
@@ -9,7 +12,8 @@ export function applyVerletIntegration(world) {
         body.updatePosition(newPosition.add(body.acceleration.scalerMult(dtSquared)));
     }
 }
-export function applyEulerIntegration(world) {
+exports.applyVerletIntegration = applyVerletIntegration;
+function applyEulerIntegration(world) {
     const dt = world.timeStep; // Get the time step from the world
     for (const body of world.bodies) {
         // Update velocity using acceleration
@@ -19,6 +23,7 @@ export function applyEulerIntegration(world) {
         body.updatePosition(newPosition);
     }
 }
+exports.applyEulerIntegration = applyEulerIntegration;
 // function applyGravity(body:PhysicalBody){
 //     // const [ax,ay]=body.acceleration;
 //    body.acceleration=addVec2(body.acceleration,body.acceleration);

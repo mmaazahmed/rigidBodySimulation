@@ -12,20 +12,36 @@
 //   "include": ["./src"],
 //   "exclude": ["node_modules"]
 // }
+// {
+//   "compilerOptions": {
+//     "lib": ["es2016","DOM"],
+//     "target": "ES6",                      // Set to ES6 or later
+//     "module": "ES6",
+//     // "module": "commonjs",
+//     "esModuleInterop": true,
+//     "outDir": "./dist",
+//         // "esModuleInterop": true,
+//     // "outFile": "./dist/main.js", // Specify the output file with .js extension
+//     "strict": true,
+//     "noErrorTruncation":true,
+//     "noUnusedLocals": true,
+//     "noImplicitAny": true,
+//   },
+//   "include": ["src/**/*.ts"],
+//   "exclude": ["node_modules"]
+// }
 {
   "compilerOptions": {
     "lib": ["es2016","DOM"],
-    "target": "ES6",                      // Set to ES6 or later
-    "module": "ES6",
-    // "module": "commonjs",
-    "esModuleInterop": true,
-    "outDir": "./dist",
-        // "esModuleInterop": true,
-    // "outFile": "./dist/main.js", // Specify the output file with .js extension
-    "strict": true,
-    "noErrorTruncation":true,
-    "noUnusedLocals": true,
-    "noImplicitAny": true,
+        "target": "ES6",                      // Set to ES6 or later
+        // "module": "ES6",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "outDir": "./dist",
+        "strict": true,
+        "noErrorTruncation":true,
+        "noUnusedLocals": true,
+        "noImplicitAny": true,
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
