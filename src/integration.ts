@@ -3,22 +3,21 @@ import { World } from "./interfaces.js";
 // import { Vec2 } from "./util/vector";
 
 export function applyVerletIntegration(world: World): void {
-    const dtSquared = world.timeStep * world.timeStep; // Square the time step
+    const dtSquared = world.timeStep * world.timeStep; 
     for (const body of world.bodies) {
-        const velocity = body.currentPosition.sub(body.previousPosition);
-        console.log(velocity)
-        const newPosition = body.currentPosition.add(velocity)
-        body.updatePosition(newPosition.add(body.acceleration.scalerMult(dtSquared)));
+        const {currentPosition,previousPosition,acceleration}=body
+        const velocity = currentPosition.sub(previousPosition);
+        // console.log(velocity)
+        const newPosition = currentPosition.add(velocity).add(acceleration.scale(0.5*dtSquared))
+        body.updatePosition(newPosition);
     }
 }
 export function applyEulerIntegration(world: World): void {
-    const dt = world.timeStep; // Get the time step from the world
+    const dt = world.timeStep; 
     for (const body of world.bodies) {
-        // Update velocity using acceleration
-        body.velocity = body.velocity.add(body.acceleration.scalerMult(dt));
+        body.velocity = body.velocity.add(body.acceleration.scale(dt));
         
-        // Update position using velocity
-        const newPosition = body.currentPosition.add(body.velocity.scalerMult(dt));
+        const newPosition = body.currentPosition.add(body.velocity.scale(dt));
         body.updatePosition(newPosition);
     }
 }

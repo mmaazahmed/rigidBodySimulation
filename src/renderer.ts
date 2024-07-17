@@ -1,4 +1,4 @@
-import { BoundaryType, Vector2D, World } from "./interfaces.js";
+import { Boundary, BoundaryType, Vector2D, World } from "./interfaces.js";
 
 export function drawRectangle(ctx:CanvasRenderingContext2D,position:Vector2D,height:number,width:number=height){
     const {x,y}=position;//center at x,y
@@ -15,13 +15,14 @@ export function drawCircle(ctx:CanvasRenderingContext2D,position:Vector2D,radius
     // ctx.fill();
 
 }
-// function drawCircularBoundary(ctx:CanvasRenderingContext2D,radius:number,pos:Vector2D){
-//     const {x,y}= boundary.position;
-//     ctx.beginPath();
-//     ctx.arc(x,y, boundary.radius,0,2*Math.PI);
-//     ctx.strokeStyle="yellow";
-//     ctx.stroke();
-// }
+function drawCircularBoundary(ctx:CanvasRenderingContext2D,boundary:Boundary){
+    const {x,y}= boundary.position;
+    ctx.beginPath();
+    if(!boundary.radius){throw Error('no radius')}
+    ctx.arc(x,y, boundary.radius,0,2*Math.PI);
+    ctx.strokeStyle="yellow";
+    ctx.stroke();
+}
 
 function clearCanvas(world:World,width:number,height:number){
     world.ctx.clearRect(0, 0, width, height);
@@ -45,7 +46,7 @@ function drawBoundaries(world:World){
         }
         if (boundary.type===BoundaryType.Circular){
             if(!boundary.radius){throw new Error(`boundary has radius:${boundary.radius}`)}
-            drawCircle(world.ctx,boundary.position,boundary.radius);  
+            drawCircularBoundary(world.ctx,boundary);  
         }
     }
 }

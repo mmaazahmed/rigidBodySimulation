@@ -26,7 +26,7 @@ const getNextId=createIdGenerator();
 function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,acceleration:Vector2D,mass:number):PhysicalBody{
     const circle={
         id:getNextId(),
-        previousPosition: Vec2(),
+        previousPosition: currentPosition.copy(),
         currentPosition:currentPosition.copy(),
         size:radius ,
         velocity:velocity.copy(),

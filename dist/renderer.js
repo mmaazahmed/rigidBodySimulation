@@ -12,13 +12,16 @@ export function drawCircle(ctx, position, radius) {
     // ctx.fillStyle="grey";
     // ctx.fill();
 }
-// function drawCircularBoundary(ctx:CanvasRenderingContext2D,radius:number,pos:Vector2D){
-//     const {x,y}= boundary.position;
-//     ctx.beginPath();
-//     ctx.arc(x,y, boundary.radius,0,2*Math.PI);
-//     ctx.strokeStyle="yellow";
-//     ctx.stroke();
-// }
+function drawCircularBoundary(ctx, boundary) {
+    const { x, y } = boundary.position;
+    ctx.beginPath();
+    if (!boundary.radius) {
+        throw Error('no radius');
+    }
+    ctx.arc(x, y, boundary.radius, 0, 2 * Math.PI);
+    ctx.strokeStyle = "yellow";
+    ctx.stroke();
+}
 function clearCanvas(world, width, height) {
     world.ctx.clearRect(0, 0, width, height);
 }
@@ -46,7 +49,7 @@ function drawBoundaries(world) {
             if (!boundary.radius) {
                 throw new Error(`boundary has radius:${boundary.radius}`);
             }
-            drawCircle(world.ctx, boundary.position, boundary.radius);
+            drawCircularBoundary(world.ctx, boundary);
         }
     }
 }

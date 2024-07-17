@@ -46,5 +46,5 @@ export interface Vector2D{
     normalize(vec2:Vector2D):Vector2D,
     add(vec2:Vector2D):Vector2D,
     sub(vec2:Vector2D):Vector2D,
-    scalerMult(mult:number):Vector2D,
+    scale(mult:number):Vector2D,
 }

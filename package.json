@@ -10,7 +10,7 @@
     "watch": [
       "./src"
     ],
-    "exec": "ts-node ./src/localServer.ts",
+    "exec": "npx tsc",
     "ext": "ts",
     "delay": "1000"
   },

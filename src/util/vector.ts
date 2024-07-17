@@ -17,9 +17,9 @@ export function Vec2(x = 0, y = 0): Vector2D {
         magnitude,
         normalize,
         copy:()=> Vec2(x,y),
-        add:(vec2: Vector2D)=> Vec2(x+= vec2.x, y+= vec2.y),
-        sub:(vec2: Vector2D)=> Vec2(x-= vec2.x, y-= vec2.y),
-        scalerMult:(mult:number)=>Vec2(x*mult,y*mult)
+        add:(vec2: Vector2D)=> Vec2(x+ vec2.x, y+ vec2.y),
+        sub:(vec2: Vector2D)=> Vec2(x- vec2.x, y- vec2.y),
+        scale:(mult:number)=>Vec2(x*mult,y*mult)
     };
 }
 export function normalise(vec:Vector2D){

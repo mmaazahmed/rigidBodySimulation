@@ -51,24 +51,26 @@ function isInsideBoundary(body:PhysicalBody,boundary:Boundary){
 }
 function handleSimpleCollision(world:World,boundary:Boundary){
     const {top,bottom,left,right}=boundary;
-    
+    // console.log(boundary)
     for (const body of world.bodies){
         
         const bodyBottom=body.currentPosition.y+body.size;
         const bodyTop=body.currentPosition.y-body.size
         const bodyLeft=body.currentPosition.x-body.size;
         const bodyRight=body.currentPosition.x+body.size;
-        if (!isInsideBoundary(body,boundary)){continue;}
-        if(bodyTop<=top){
-            console.log('here')
-            body.velocity.y*=-1;
-        }else if(bodyBottom >= bottom){
-            body.velocity.y*=-1;
-        }else if(bodyLeft >= left){
-            body.velocity.x*=-1;
-        }else if(bodyRight >= right){
-            body.velocity.x*=-1;
+        body.velocity=body.velocity.copy()
+    if(body.id===1){
+        console.log(`bodyTop:${bodyTop},top:${top},bottom:${bottom},left:${left},right:${right}`)
+    }
+        // if (!isInsideBoundary(body,boundary)){continue;}
+        if (bodyTop <= top || bodyBottom >= bottom) {
+            // console.log('h/ere',body.velocity.y)
+            body.velocity.y *= -1; // Reverse y velocity on collision with top or bottom boundary
         }
+        if (bodyLeft <= left || bodyRight >= right) {
+            body.velocity.x *= -1; // Reverse x velocity on collision with left or right boundary
+        }
+
         
     
     }   

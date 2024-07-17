@@ -1,6 +1,6 @@
 import { createShapeModule } from "./bodies.js";
 import { applyEulerIntegration } from "./integration.js";
-// import { applyVerletIntegration,applyEulerIntegration } from "./integration";
+import { applyVerletIntegration} from "./integration.js";
 import { applySimpleCollision } from "./collision.js";
 import { Vec2 } from "./util/vector.js";
 import { World } from "./interfaces.js";
@@ -47,8 +47,8 @@ export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInte
 
 export function simulateWorld(world:World){
     if(world.isPause){return;}
-    // applyVerletIntegration(world);
-    applyEulerIntegration(world);
+    applyVerletIntegration(world);
+    // applyEulerIntegration(world);
     applySimpleCollision(world);
 }
 

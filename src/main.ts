@@ -27,10 +27,10 @@ const world =createWorld(ctx,0.01);
 populateWorld(world,nBodies);
 // initialiseInputListeners(world);
 const BoundaryModule=createBoundaryModule();
-const pos=Vec2(canvas.width/4,canvas.height/4)
+const pos=Vec2(500,500)
 // const pos2=Vec2(Math.floor(width),Math.floor(height))
-// BoundaryModule.rectangular(world,3000,500,pos);
-BoundaryModule.circular(world,500,pos);
+// BoundaryModule.rectangular(world,canvas.width/4,canvas.height/4);
+BoundaryModule.circular(world,300,pos);
 
 // BoundaryModule.rectangular(world,1,pos2);
 
