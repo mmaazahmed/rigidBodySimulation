@@ -19,6 +19,7 @@ export function Vec2(x = 0, y = 0): Vector2D {
         copy:()=> Vec2(x,y),
         add:(vec2: Vector2D)=> Vec2(x+ vec2.x, y+ vec2.y),
         sub:(vec2: Vector2D)=> Vec2(x- vec2.x, y- vec2.y),
+        distanceTo:(vec2:Vector2D)=>vec2.sub(Vec2(x,y)).magnitude(),
         scale:(mult:number)=>Vec2(x*mult,y*mult)
     };
 }

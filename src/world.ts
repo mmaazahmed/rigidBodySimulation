@@ -47,8 +47,8 @@ export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInte
 
 export function simulateWorld(world:World){
     if(world.isPause){return;}
-    applyVerletIntegration(world);
-    // applyEulerIntegration(world);
+    // applyVerletIntegration(world);
+    applyEulerIntegration(world);
     applySimpleCollision(world);
 }
 

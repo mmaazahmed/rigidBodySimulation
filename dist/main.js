@@ -27,7 +27,7 @@ populateWorld(world, nBodies);
 const BoundaryModule = createBoundaryModule();
 const pos = Vec2(500, 500);
 // const pos2=Vec2(Math.floor(width),Math.floor(height))
-// BoundaryModule.rectangular(world,canvas.width/4,canvas.height/4);
+BoundaryModule.rectangular(world, canvas.width, canvas.height / 2);
 BoundaryModule.circular(world, 300, pos);
 // BoundaryModule.rectangular(world,1,pos2);
 function animate() {

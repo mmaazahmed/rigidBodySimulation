@@ -15,6 +15,7 @@ export function Vec2(x = 0, y = 0) {
         copy: () => Vec2(x, y),
         add: (vec2) => Vec2(x + vec2.x, y + vec2.y),
         sub: (vec2) => Vec2(x - vec2.x, y - vec2.y),
+        distanceTo: (vec2) => vec2.sub(Vec2(x, y)).magnitude(),
         scale: (mult) => Vec2(x * mult, y * mult)
     };
 }

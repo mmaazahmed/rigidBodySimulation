@@ -10,6 +10,8 @@ export function drawCircle(ctx:CanvasRenderingContext2D,position:Vector2D,radius
     const {x,y}= position;
     ctx.beginPath();
     ctx.arc(x,y, radius,0,2*Math.PI);
+    ctx.strokeStyle="black";
+
     ctx.stroke()
     // ctx.fillStyle="grey";
     // ctx.fill();
@@ -23,10 +25,23 @@ function drawCircularBoundary(ctx:CanvasRenderingContext2D,boundary:Boundary){
     ctx.strokeStyle="yellow";
     ctx.stroke();
 }
+function drawRectangularBoundary(ctx:CanvasRenderingContext2D,boundary:Boundary){
+    const { x, y } = boundary.position;
+    const { height, width } = boundary;
+    
+    if (!height || !width) {
+        throw new Error('no length or width');
+    }
+
+    ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.strokeRect(x , y , width, height);
+    ctx.stroke();
+}
 
 function clearCanvas(world:World,width:number,height:number){
     world.ctx.clearRect(0, 0, width, height);
-}
+}   
 function drawObjects(world:World){
     for (const body of world.bodies){
         body.draw(world.ctx);
@@ -38,7 +53,8 @@ function drawBoundaries(world:World){
     for (const boundary of world.boundaries){
         if (boundary.type===BoundaryType.Rectangular){
             if(!boundary.height || ! boundary.width){throw new Error(`${boundary.type} has dimensions:${boundary.height,boundary.width}`)}
-            drawRectangle(world.ctx,boundary.position,boundary.height,boundary.width);
+            drawRectangularBoundary(world.ctx,boundary)
+            // drawRectangle(world.ctx,boundary.position,boundary.height,boundary.width);
         }
         if (boundary.type===BoundaryType.Square){
             if(!boundary.length){throw new Error(`${boundary.type} has dimensions:${boundary.length}`)}

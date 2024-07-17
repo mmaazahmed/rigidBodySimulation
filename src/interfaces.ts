@@ -43,8 +43,9 @@ export interface Vector2D{
     y:number,
     magnitude():number
     copy():Vector2D
-    normalize(vec2:Vector2D):Vector2D,
+    normalize():Vector2D,
     add(vec2:Vector2D):Vector2D,
     sub(vec2:Vector2D):Vector2D,
     scale(mult:number):Vector2D,
+    distanceTo(vec2:Vector2D):number,
 }

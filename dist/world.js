@@ -1,5 +1,5 @@
 import { createShapeModule } from "./bodies.js";
-import { applyVerletIntegration } from "./integration.js";
+import { applyEulerIntegration } from "./integration.js";
 import { applySimpleCollision } from "./collision.js";
 import { Vec2 } from "./util/vector.js";
 function getRandomRange(max, min) {
@@ -40,8 +40,8 @@ export function simulateWorld(world) {
     if (world.isPause) {
         return;
     }
-    applyVerletIntegration(world);
-    // applyEulerIntegration(world);
+    // applyVerletIntegration(world);
+    applyEulerIntegration(world);
     applySimpleCollision(world);
 }
 // function animate(){

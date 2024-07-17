@@ -8,6 +8,7 @@ export function drawCircle(ctx, position, radius) {
     const { x, y } = position;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
     ctx.stroke();
     // ctx.fillStyle="grey";
     // ctx.fill();
@@ -20,6 +21,17 @@ function drawCircularBoundary(ctx, boundary) {
     }
     ctx.arc(x, y, boundary.radius, 0, 2 * Math.PI);
     ctx.strokeStyle = "yellow";
+    ctx.stroke();
+}
+function drawRectangularBoundary(ctx, boundary) {
+    const { x, y } = boundary.position;
+    const { height, width } = boundary;
+    if (!height || !width) {
+        throw new Error('no length or width');
+    }
+    ctx.beginPath();
+    ctx.strokeStyle = "yellow";
+    ctx.strokeRect(x, y, width, height);
     ctx.stroke();
 }
 function clearCanvas(world, width, height) {
@@ -37,7 +49,8 @@ function drawBoundaries(world) {
             if (!boundary.height || !boundary.width) {
                 throw new Error(`${boundary.type} has dimensions:${boundary.height, boundary.width}`);
             }
-            drawRectangle(world.ctx, boundary.position, boundary.height, boundary.width);
+            drawRectangularBoundary(world.ctx, boundary);
+            // drawRectangle(world.ctx,boundary.position,boundary.height,boundary.width);
         }
         if (boundary.type === BoundaryType.Square) {
             if (!boundary.length) {
