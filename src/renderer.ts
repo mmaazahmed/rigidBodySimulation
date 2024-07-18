@@ -11,12 +11,9 @@ export function drawCircle(ctx:CanvasRenderingContext2D,position:Vector2D,radius
     ctx.beginPath();
     ctx.arc(x,y, radius,0,2*Math.PI);
     ctx.strokeStyle="black";
-
     ctx.stroke()
-    // ctx.fillStyle="grey";
-    // ctx.fill();
-
 }
+
 function drawCircularBoundary(ctx:CanvasRenderingContext2D,boundary:Boundary){
     const {x,y}= boundary.position;
     ctx.beginPath();

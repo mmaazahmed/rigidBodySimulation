@@ -17,7 +17,7 @@ function createCircularBoundary(world:World,radius:number,position:Vector2D){
 function createRectangularBoundary(world:any,width:number,height:number,position:Vector2D):void{
     const {x,y}=position;
     const boundary:Boundary={
-        position,
+        position:position.sub(Vec2(width/2,height/2)),
         type:BoundaryType.Rectangular,
         width,
         height,
@@ -66,25 +66,7 @@ function handleSimpleCollision(world:World,boundary:Boundary){
         if(boundary.type===BoundaryType.Rectangular){
                 handleCircleOnRectangleCollision(body,boundary)
         }
-        
-    //     const bodyBottom=body.currentPosition.y+body.size;
-    //     const bodyTop=body.currentPosition.y-body.size
-    //     const bodyLeft=body.currentPosition.x-body.size;
-    //     const bodyRight=body.currentPosition.x+body.size;
-    //     body.velocity=body.velocity.copy()
-    // if(body.id===1){
-    //     console.log(`bodyTop:${bodyTop},top:${top},bottom:${bottom},left:${left},right:${right}`)
-    // }
-    //     // if (!isInsideBoundary(body,boundary)){continue;}
-    //     if (bodyTop <= top || bodyBottom >= bottom) {
-    //         // console.log('h/ere',body.velocity.y)
-    //         body.velocity.y *= -1; // Reverse y velocity on collision with top or bottom boundary
-    //     }
-    //     if (bodyLeft <= left || bodyRight >= right) {
-    //         body.velocity.x *= -1; // Reverse x velocity on collision with left or right boundary
-    //     }
-
-        
+             
     
     }   
 }

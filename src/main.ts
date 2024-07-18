@@ -23,13 +23,13 @@ const ctx:CanvasRenderingContext2D=canvas.getContext("2d")!;
 
 
 const nBodies=1000;
-const world =createWorld(ctx,0.01);
+const world =createWorld(ctx,0.001);
 populateWorld(world,nBodies);
 // initialiseInputListeners(world);
 const BoundaryModule=createBoundaryModule();
 const pos=Vec2(500,500)
 // const pos2=Vec2(Math.floor(width),Math.floor(height))
-BoundaryModule.rectangular(world,canvas.width,canvas.height/2);
+BoundaryModule.rectangular(world,canvas.width/4,canvas.height/4,pos);
 BoundaryModule.circular(world,300,pos);
 
 // BoundaryModule.rectangular(world,1,pos2);

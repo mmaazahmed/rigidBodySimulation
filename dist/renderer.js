@@ -10,8 +10,6 @@ export function drawCircle(ctx, position, radius) {
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.strokeStyle = "black";
     ctx.stroke();
-    // ctx.fillStyle="grey";
-    // ctx.fill();
 }
 function drawCircularBoundary(ctx, boundary) {
     const { x, y } = boundary.position;

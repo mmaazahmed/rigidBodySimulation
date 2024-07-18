@@ -8,22 +8,7 @@ function createIdGenerator(){
 
 const getNextId=createIdGenerator();
 
-// export function drawSquare(ctx,position,length){
-//     const {x,y}=position;//center at x,y
-//     ctx.fillStyle="grey";
-//     ctx.fillRect(x-length/2, y-length/2, length, length);
-// }
-
-// export function drawCircle(ctx,position,radius){
-//     const {x,y}= position;
-//     ctx.beginPath();
-//     ctx.arc(x,y, radius,0,2*Math.PI);
-//     ctx.fillStyle="grey";
-//     ctx.fill();
-
-// }
-
-function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,acceleration:Vector2D,mass:number):PhysicalBody{
+function createCircle(radius:number,currentPosition:Vector2D,velocity:Vector2D,acceleration:Vector2D,mass:number){
     const circle={
         id:getNextId(),
         previousPosition: currentPosition.copy(),
@@ -49,7 +34,7 @@ function createSquare(
     velocity:Vector2D,
     acceleration:Vector2D,
     mass:number
-):PhysicalBody{
+){
     const square={
         id :getNextId(),
         size:length,
@@ -66,6 +51,7 @@ function createSquare(
             this.currentPosition=newPosition.copy();
         }
     };
+
     return square;
 
 }
