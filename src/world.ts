@@ -22,7 +22,8 @@ export function populateWorld(world:World,nBodies:number){
 
         const randomSize=getRandomRange(1,10);
         if (random<0.5){ 
-            world.bodies.push(ShapeModule.createCircle(randomSize,randomPos,randomPos));
+
+            world.bodies.push(ShapeModule.createCircle(randomSize,randomPos,randomPos.scale(2),randomPos.scale(1.4),undefined,0.2<random));
            
         }else{
             world.bodies.push(ShapeModule.createSquare(randomSize,randomPos,randomPos));
@@ -32,7 +33,7 @@ export function populateWorld(world:World,nBodies:number){
     }
 }
 
-export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInterval=60):World{
+export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInterval=60,gravity=Vec2(0,-10)):World{
     return{
         ctx,
         timeStep,
@@ -40,6 +41,7 @@ export function createWorld(ctx:CanvasRenderingContext2D,timeStep=0.1,updateInte
         isPause:false,
         boundaries:[],
         updateInterval,
+        gravity,
         displayDy:0,
         displayDx:0
     }

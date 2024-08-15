@@ -1,4 +1,5 @@
-import { PhysicalBody, Boundary,BoundaryType, Vector2D, World } from "./interfaces.js";
+import { PhysicalBody, Boundary,BoundaryType, Vector2D, World, CircularBody, RectangularBody } from "./interfaces.js";
+import { getRandomColor } from "./renderer.js";
 import { Vec2 } from "./util/vector.js";
 
 function createCircularBoundary(world:World,radius:number,position:Vector2D){
@@ -10,7 +11,8 @@ function createCircularBoundary(world:World,radius:number,position:Vector2D){
         top:y-radius,
         bottom:y+radius,
         left:x-radius,
-        right:x+radius
+        right:x+radius,
+        color:getRandomColor()
     };
     world.boundaries.push(boundary);
 }
@@ -24,7 +26,8 @@ function createRectangularBoundary(world:any,width:number,height:number,position
         top:y,
         bottom:height+y,
         left:x,
-        right:x+width
+        right:x+width,
+        color:getRandomColor()
     };
     world.boundaries.push(boundary);
 }
@@ -40,54 +43,65 @@ export function createBoundaryModule(){
         }
     };
 }
-function isInsideBoundary(body:PhysicalBody,boundary:Boundary){
-    const {top,bottom,left,right}=boundary;
-    const bodyBottom=body.currentPosition.y+body.size;
-    const bodyTop=body.currentPosition.y-body.size
-    const bodyLeft=body.currentPosition.x-body.size;
-    const bodyRight=body.currentPosition.x+body.size;
-    return  (bodyBottom >= top && bodyTop <= bottom && bodyLeft<=right && bodyRight >=left);
+// function isInsideBoundary(body:PhysicalBody,boundary:Boundary){
+//     const {top,bottom,left,right}=boundary;
+//     const bodyBottom=body.currentPosition.y+body.size;
+//     const bodyTop=body.currentPosition.y-body.size
+//     const bodyLeft=body.currentPosition.x-body.size;
+//     const bodyRight=body.currentPosition.x+body.size;
+//     return  (bodyBottom >= top && bodyTop <= bottom && bodyLeft<=right && bodyRight >=left);
 
+// }
+function isCircularBody(body: any): body is CircularBody {
+    return (body as CircularBody).radius !== undefined;
 }
-function isInsideCircularBoundary(body:PhysicalBody,boundary:Boundary){
-    if (!boundary.radius){ throw new Error('no radius')}
-    const dist=body.currentPosition.distanceTo(boundary.position)
-    return dist + body.size <= boundary.radius;
 
+function isSquareBody(body: any): body is RectangularBody {
+    return (body as RectangularBody).width !== undefined && (body as RectangularBody).height !== undefined;
 }
 function handleSimpleCollision(world:World,boundary:Boundary){
     const {top,bottom,left,right}=boundary;
     // console.log(boundary)
     for (const body of world.bodies){
-        if( boundary.type===BoundaryType.Circular){
-            handleCircleOnCircleCollision(body,boundary)
+        if( boundary.type===BoundaryType.Circular ){
+            if (isCircularBody(body)) {
+                handleCircleOnCircleCollision(body, boundary);
+                // handleCircleOnRectangleCollision(body, boundary);
+            }
 
         }
-        if(boundary.type===BoundaryType.Rectangular){
-                handleCircleOnRectangleCollision(body,boundary)
-        }
+        // if(boundary.type===BoundaryType.Rectangular){
+        //     if (isCircularBody(body)) {
+        //         handleCircleOnRectangleCollision(body,boundary)
+        //     }
+        // }
              
     
     }   
 }
+function isInsideCircularBoundary(body:CircularBody,boundary:Boundary){
+    if (!boundary.radius){ throw new Error('no radius')}
+    const dist=body.currentPosition.distanceTo(boundary.position)
+    return dist + body.radius <= boundary.radius;
 
-function handleCircleOnCircleCollision(circle:PhysicalBody,boundary:Boundary){
+}
+function handleCircleOnCircleCollision(circle:CircularBody,boundary:Boundary){
     if(!boundary.radius){ throw new Error('no radius')}
     // const dist=(boundary.position.sub(circle.currentPosition)).magnitude()
     const dist=boundary.position.distanceTo(circle.currentPosition)
     if(isInsideCircularBoundary(circle,boundary)){
-        if(dist>=boundary.radius+circle.size){
+        if(dist>=boundary.radius+circle.radius){
             // console.log(circle.velocity)
             circle.velocity=circle.velocity.scale(-1)
         }
     }else{
-        if(dist<=boundary.radius+circle.size){
+        if(dist<=boundary.radius+circle.radius){
             // console.log(circle.velocity)
             circle.velocity=circle.velocity.scale(-1)
         }
     }
 }
-function handleCircleOnRectangleCollision(circle: PhysicalBody, boundary: Boundary) {
+function handleCircleOnRectangleCollision(circle: CircularBody, boundary: Boundary) {
     if(!boundary.width || !boundary.height){throw new Error('no width or height')}
     // Calculate the closest point on the rectangle to the circle's center
     const closestX = Math.max(boundary.position.x, Math.min(circle.currentPosition.x, boundary.position.x + boundary.width));
@@ -99,10 +113,10 @@ function handleCircleOnRectangleCollision(circle: PhysicalBody, boundary: Bounda
     const distanceSquared = distanceX * distanceX + distanceY * distanceY;
 
     // Check if the distance is less than the circle's radius squared (collision detection)
-    if (distanceSquared < circle.size * circle.size) {
+    if (distanceSquared < circle.radius * circle.radius) {
         // Handle collision
         const distance = Math.sqrt(distanceSquared);
-        const overlap = circle.size - distance;
+        const overlap = circle.radius - distance;
 
         // Calculate the collision response (simple resolution)
         const normalX = distanceX / distance;

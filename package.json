@@ -10,7 +10,7 @@
     "watch": [
       "./src"
     ],
-    "exec": "npx tsc",
+    "exec": "npx tsc || exit 1",
     "ext": "ts",
     "delay": "1000"
   },

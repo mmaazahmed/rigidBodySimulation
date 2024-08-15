@@ -15,6 +15,7 @@ export function applyVerletIntegration(world: World): void {
 export function applyEulerIntegration(world: World): void {
     const dt = world.timeStep; 
     for (const body of world.bodies) {
+        body.acceleration=body.acceleration.sub(world.gravity)
         body.velocity = body.velocity.add(body.acceleration.scale(dt));
         
         const newPosition = body.currentPosition.add(body.velocity.scale(dt));
